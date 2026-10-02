@@ -1,8 +1,11 @@
 import sqlite3
+from pathlib import Path
 from models import Chamado
 
+DB_PATH = Path(__file__).parent / 'chamados.db'
+
 def conectar():
-    return sqlite3.connect('chamados.db')
+    return sqlite3.connect(DB_PATH)
 
 def criar_tabela():
     with conectar() as conn:
