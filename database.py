@@ -30,6 +30,16 @@ def listar():
         linhas = conn.execute('SELECT id, titulo, descricao, status FROM chamados').fetchall()
     return [Chamado(i[1], i[2], i[3], i[0]) for i in linhas]
 
+def buscar_id(id):
+    with conectar() as conn:
+        linha = conn.execute(
+            'SELECT id, titulo, descricao, status FROM chamados WHERE id = ?', (id, )
+        ).fetchone()
+    if linha is None:
+        return None
+    id, titulo, descricao, status = linha
+    return Chamado(titulo, descricao, status, id)
+
 def fechar(id):
     with conectar() as conn:
         conn.execute("UPDATE chamados SET status = 'fechado' WHERE id = ?", (id,))
