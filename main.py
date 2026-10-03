@@ -9,19 +9,38 @@ def menu():
         op = input('Opção: ')
 
         if op == '1':
-            titulo = input('Título: ')
-            desc = input('Descrição: ')
-            database.inserir(Chamado(titulo, desc))
+            titulo = (input('Título: ')).strip()
+            desc = (input('Descrição: ')).strip()
+            prioridade = (input('Prioridade(baixa/média/alta): ')).lower().strip()
+            if titulo == '' or desc == '':
+                print('título/descrição em branco.')
+            elif prioridade not in ('baixa', 'média', 'alta'):
+                print('prioridade inválida')
+            else:
+                database.inserir(Chamado(titulo, desc, prioridade))
+                print('requisito de chamado realizado')
 
         elif op == '2':
-            for c in database.listar():
-                print(c)
+            chamado = database.listar()
+            if not chamado:
+                print('nenhum cadastro encontrado')
+            else:
+                for c in chamado:
+                    print(c)
 
         elif op == '3':
             try:
-                database.fechar(int(input('ID: ')))
+                chamado_id = (int(input('ID: ')))
+                chamado = database.buscar_id(chamado_id)
+                if chamado is None:
+                    print('ID inexistente')
+                elif chamado.status == 'fechado':
+                    print('chamado já está fechado')
+                else:
+                    database.fechar(chamado_id)
+                    print('chamado fechado')
             except ValueError:
-                print('Digite um número válido')
+                print('digite um valor válido')
 
         elif op == '4':
             try:
