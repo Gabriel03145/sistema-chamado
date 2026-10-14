@@ -7,15 +7,16 @@ Simula o registro e o acompanhamento de chamados de suporte técnico.
 Python 3 · SQLite · POO
 
 ## Funcionalidades
-- Abrir chamado
+- Abrir chamado (com título, descrição e prioridade)
 - Listar chamados
 - Buscar chamado por ID
 - Fechar chamado (o chamado não é apagado, só muda o status)
+- Validação de entradas (ID inválido, chamado inexistente ou já fechado)
 
 ## Como rodar
 ```bash
-git clone https://github.com/Gabriel03145/sistema_chamado
-cd sistema_chamado
+git clone https://github.com/Gabriel03145/sistema-chamado
+cd sistema-chamado
 python main.py
 ```
 
@@ -41,6 +42,5 @@ python main.py
 - `database.py`: comandos SQL
 
 ## Próximos passos
-- Prioridade e data de abertura
-- Testes com pytest
+- Mais testes com pytest
 - API com FastAPI
